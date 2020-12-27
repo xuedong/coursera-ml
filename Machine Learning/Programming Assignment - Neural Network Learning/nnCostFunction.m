@@ -72,9 +72,9 @@ a2 = [ones(m, 1) a2];
 z3 = a2 * Theta2';
 a3 = sigmoid(z3);
 
-yvec = (1:num_labels)==y;
+yvec = (1:num_labels) == y;
 
-J = (1/m) * sum(sum(-yvec.*log(a3) - (1-yvec).*log(1-a3)));
+J = (1/m) * sum(sum(-yvec .* log(a3) - (1 - yvec) .* log(1 - a3)));
 
 % Regularized cost function
 reg1 = Theta1;
@@ -82,7 +82,7 @@ reg1(:, 1) = 0;
 reg2 = Theta2;
 reg2(:, 1) = 0;
 
-J = J + (lambda/(2*m)) * (sum(sum(reg1.*reg1)) + sum(sum(reg2.*reg2)));
+J = J + (lambda/(2*m)) * (sum(sum(reg1 .* reg1)) + sum(sum(reg2 .* reg2)));
 
 % Backpropagation
 delta3 = a3 - yvec;

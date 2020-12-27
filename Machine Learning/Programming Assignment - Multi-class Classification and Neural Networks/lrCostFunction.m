@@ -9,9 +9,8 @@ function [J, grad] = lrCostFunction(theta, X, y, lambda)
 m = length(y); % number of training examples
 
 % You need to return the following variables correctly 
-J = - dot(y, log(sigmoid(X*theta)))/m - dot(1-y, log(1-sigmoid(X*theta)))/m;
-
-grad = X'*(sigmoid(X*theta)-y)/m;
+J = 0;
+grad = zeros(size(theta));
 
 % ====================== YOUR CODE HERE ======================
 % Instructions: Compute the cost of a particular choice of theta.
@@ -37,11 +36,15 @@ grad = X'*(sigmoid(X*theta)-y)/m;
 %           grad = grad + YOUR_CODE_HERE (using the temp variable)
 %
 
+J = - dot(y, log(sigmoid(X * theta))) / m - ...
+	dot(1 - y, log(1 - sigmoid(X * theta))) / m;
+grad = X' * (sigmoid(X * theta) - y) / m;
+
+% Regularization
 temp = theta;
 temp(1) = 0;
 J = J + dot(temp, temp)*lambda/(2*m);
-
-grad = grad + temp*lambda/m;
+grad = grad + tempi * lambda/m;
 
 % =============================================================
 
